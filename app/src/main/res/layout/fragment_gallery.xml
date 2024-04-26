@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/navcolor"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".ui.gallery.GalleryFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+
+            android:orientation="vertical"
+            android:padding="50dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical"
+                android:src="@drawable/reporte" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:hint="¿Donde se encuentra?"
+                android:textSize="18dp"
+                android:layout_marginLeft="5dp"
+                app:hintTextColor="@color/purple_500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView">
+
+                <AutoCompleteTextView
+                    android:id="@+id/autocompletarestacion"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:dropDownHeight="200dp"
+                    android:inputType="none"
+                    android:textSize="18dp"
+                    tools:text="Estacion" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="5dp"
+                android:hint="@string/problemas"
+                android:textSize="18dp"
+                app:hintTextColor="@color/navcolor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView">
+
+                <AutoCompleteTextView
+                    android:id="@+id/autocompletararea"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="1"
+                    android:dropDownHeight="200dp"
+                    android:inputType="none"
+                    android:textSize="18dp"
+                    tools:text="Área" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <EditText
+                android:id="@+id/desctxt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="5dp"
+                android:backgroundTint="@color/black"
+                android:hint="@string/error"
+                android:inputType="textMultiLine"
+                android:minLines="4"
+                android:textSize="18dp" />
+
+            <Button
+                android:id="@+id/selectimg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_horizontal"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:onClick="seleccionarImagen"
+                android:text="@string/imagen"
+                android:textSize="18dp" />
+
+            <ImageView
+                android:id="@+id/imgSelected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_below="@id/selectimg"
+                android:layout_centerHorizontal="true" />
+
+            <Button
+                android:id="@+id/btnGenerar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/black"
+                android:textColor="@color/white"
+                android:text="@string/report"
+                android:layout_marginLeft="5dp"
+                android:textSize="18dp"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

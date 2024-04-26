@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">TicketSystem</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Usuario</string>
+    <string name="nav_header_subtitle">user@android.com</string>
+    <string name="nav_header_desc">Menu navegacionr</string>
+    <string name="action_settings">Ayuda</string>
+
+    <string name="logo_texto">INFOSYNC</string>
+    <string name="logo_frase">Más fácil, más rápido, más eficiente</string>
+    <string name="appnombre">Sistema de soporte por tickets</string>
+    <string name ="ingresar_sistema">Acceder al sistema</string>
+
+    <string-array name="Estacion">
+        <item>Washmobile</item>
+        <item>Cuauhtemoc</item>
+        <item>La Gloria</item>
+        <item>Libertad Aeropuerto</item>
+        <item>Jibarito</item>
+        <item>Tecate Estadio</item>
+        <item>Hacienda Santa Maria</item>
+        <item>Centro</item>
+        <item>Cañaveral</item>
+    </string-array>
+
+    <string-array name="area">
+        <item>Finanzas</item>
+        <item>Direccion</item>
+        <item>Sistemas</item>
+        <item>Mantenimiento</item>
+    </string-array>
+
+
+    <string name="menu_home">Inicio</string>
+    <string name="menu_gallery">Generar Reporte</string>
+    <string name="menu_slideshow">Ver Reportes</string>
+
+    <string name ="login_texto">Inicio de Sesion</string>
+    <string name ="user_texto">Ingresa usuario</string>
+    <string name ="psw_texto">Ingresa contraseña</string>
+    <string name ="ingresar_texto">INGRESAR</string>
+    <string name ="problemas_texto">¿PROBLEMAS PARA INGRESAR?</string>
+
+    <string name="bienvenidos">Bienvenidos</string>
+    <string name="acerca">Nuestro servicio</string>
+    <string name="somos">¿Quienes somos?</string>
+    <string name="cerrar">Cerrar sesion</string>
+    <string name="sesion">Cerrar sesion</string>
+
+    <string name="problemas">¿En donde esta pasando?</string>
+    <string name="error">Describe el problema</string>
+    <string name="imagen">Selecciona Imagen</string>
+    <string name="report">Enviar reporte</string>
+
+
+    <string name="texto_bienvenidos">¡Bienvenidos a nuestro proyecto de desarrollo de un Sistema de Tickets!\n\n
+        Estamos emocionados de presentarles esta iniciativa que busca simplificar la gestión de solicitudes y consultas dentro de cualquier empresa.\n\n
+        A través de esta plataforma, pretendemos ofrecer una solución intuitiva y accesible que mejore la eficiencia organizacional al agilizar el proceso de gestión de tickets.\n\n
+        Estamos comprometidos a proporcionar una experiencia fluida y eficaz para nuestros usuarios, facilitando la comunicación y resolución de problemas.</string>
+
+</resources>
