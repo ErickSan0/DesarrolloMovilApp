@@ -3,16 +3,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 
 class LoginActivity : AppCompatActivity(){
 
+
     private lateinit var loginbtn: Button //btn login
-    private lateinit var msjbtn: Button //btn contacto
     private lateinit var usuario: EditText
     private lateinit var contra: EditText
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,13 +21,19 @@ class LoginActivity : AppCompatActivity(){
         supportActionBar?.hide()
 
         //Inicializar vistas
+        val registrar: TextView = findViewById(R.id.textView)
         usuario = findViewById(R.id.user)
         contra = findViewById(R.id.psw)
         loginbtn = findViewById(R.id.btnlogin)
-        msjbtn = findViewById(R.id.btnprob)
 
-        //Muestra msj, por el momento no esta contemplado q el user se registre
-        msjbtn.setOnClickListener {MostrarMensaje()}
+        //ss
+        registrar.setOnClickListener {
+            // Aquí puedes iniciar una nueva actividad o realizar alguna otra acción al hacer clic en el botón
+            val intent = Intent(this, RegistroActivity::class.java)
+            startActivity(intent)
+        }
+
+
         //acceso segun credenciales al MainActivity
         loginbtn.setOnClickListener{
             val usuarioA = usuario.text.toString()
@@ -49,16 +56,4 @@ class LoginActivity : AppCompatActivity(){
         return usuario == usuarioLocal && contra == contraLocal
     }
 
-    private fun MostrarMensaje() {
-        val mensaje = "Si tienes problemas para acceder, por favor póngase en contacto con el equipo de sistemas."
-        val builder = AlertDialog.Builder(this)
-
-        builder.setTitle("Contacto Sistemas")
-        builder.setMessage(mensaje)
-        builder.setPositiveButton("Confirmar") { dialog, _ ->
-            dialog.dismiss()
-        }
-        val alertDialog = builder.create()
-        alertDialog.show()
-    }
 }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "825312800419",
+    "project_id": "desarrollomovil-98257",
+    "storage_bucket": "desarrollomovil-98257.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825312800419:android:fe0dd294660ee896bfd916",
+        "android_client_info": {
+          "package_name": "com.example.sistemasoporte"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDU3LKQpIvRRP7sDaEkRUrMGQwQZHDLAe0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

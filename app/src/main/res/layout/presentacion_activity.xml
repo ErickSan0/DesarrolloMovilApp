@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/navcolor"
+    android:background="@color/white"
     tools:context=".PresentacionActivity">
 
     <LinearLayout
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:text="@string/appnombre"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"/>
 
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:text="@string/logo_frase"
             android:textAlignment="center"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"/>
 
@@ -46,9 +46,9 @@
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/navcolor"
             android:text="@string/ingresar_sistema"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="15sp"/>
     </LinearLayout>
 
