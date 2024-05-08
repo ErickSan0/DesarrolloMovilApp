@@ -38,7 +38,7 @@
                 android:hint="¿Donde se encuentra?"
                 android:textSize="18dp"
                 android:layout_marginLeft="5dp"
-                app:hintTextColor="@color/purple_500"
+                app:hintTextColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView">
@@ -63,7 +63,7 @@
                 android:layout_marginLeft="5dp"
                 android:hint="@string/problemas"
                 android:textSize="18dp"
-                app:hintTextColor="@color/navcolor"
+                app:hintTextColor="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView">
@@ -72,7 +72,6 @@
                     android:id="@+id/autocompletararea"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:dropDownHeight="200dp"

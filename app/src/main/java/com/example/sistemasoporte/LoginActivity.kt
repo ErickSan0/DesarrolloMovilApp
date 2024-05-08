@@ -23,31 +23,33 @@ class LoginActivity : AppCompatActivity(){
         contra = findViewById(R.id.psw)
         loginbtn = findViewById(R.id.btnlogin)
 
+        //codigo tv para reg xd
         val registrar: TextView = findViewById(R.id.textView)
         registrar.setOnClickListener {
             val intent = Intent(this, RegistroActivity::class.java)
             startActivity(intent)
         }
 
+        //codigo iniciosesion
         loginbtn.setOnClickListener{
             val usuarioA = usuario.text.toString()
             val contraA = contra.text.toString()
 
             if (usuarioA.isNotEmpty() && contraA.isNotEmpty()) {
-                // Verificar credenciales con Firebase
+                // Aqui se verifican la cuenta en firebase por medio de correo y psw
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(usuarioA, contraA)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            // Si el inicio de sesión es exitoso, abrir MainActivity
+                            // Si la cuenta es correcta se abre mainactivity
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
                         } else {
-                            // Si hay un error, mostrar un mensaje de error
+                            // si presenta un problema de validacion muestra este mensaje
                             Toast.makeText(this@LoginActivity, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
                         }
                     }
             } else {
-                // Si los campos están vacíos, mostrar un mensaje
+                // si hay campos vacios...
                 Toast.makeText(this@LoginActivity, "Los campos no pueden estar vacíos", Toast.LENGTH_SHORT).show()
             }
         }
