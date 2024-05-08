@@ -1,4 +1,8 @@
 package com.example.sistemasoporte
 
-class TablasBD {
-}
+data class TablasBD(
+    val usuario: String? = null,
+    val psw: String? = null,
+    val correo: String? = null,
+    val id: String? = null
+    )
