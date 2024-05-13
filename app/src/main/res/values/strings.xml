@@ -31,6 +31,12 @@
         <item>Mantenimiento</item>
     </string-array>
 
+    <string-array name="tipo">
+        <item>Usuario</item>
+        <item>Administrador</item>
+    </string-array>
+
+
 
     <string name="menu_home">Inicio</string>
     <string name="menu_gallery">Generar Reporte</string>

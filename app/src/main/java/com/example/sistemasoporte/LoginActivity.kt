@@ -16,6 +16,7 @@ class LoginActivity : AppCompatActivity(){
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = LoginActivityBinding.inflate(layoutInflater)
@@ -23,7 +24,7 @@ class LoginActivity : AppCompatActivity(){
         supportActionBar?.hide()
 
         firebaseDatabase = FirebaseDatabase.getInstance()
-        databaseReference = firebaseDatabase.reference.child("usuarios")
+        databaseReference = firebaseDatabase.reference.child("usuario")
 
         binding.btnlogin.setOnClickListener {
             val txtusuario = binding.user.text.toString()
@@ -54,7 +55,12 @@ class LoginActivity : AppCompatActivity(){
                         if (tablabd != null && tablabd.psw == psw) {
                             usuarioCorrecto = true
                             Toast.makeText(this@LoginActivity, "Bienvenido", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+                            val intent = if (tablabd.tipo == TipoCuenta.ADMINISTRADOR) {
+                                Intent(this@LoginActivity, AdminMain::class.java)
+                            } else {
+                                Intent(this@LoginActivity, MainActivity::class.java)
+                            }
+                                startActivity(intent)
                             finish()
                             return
                         }
