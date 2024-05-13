@@ -74,16 +74,16 @@ class GalleryFragment : Fragment() {
         val area = autocompletarproblema.text.toString()
 
         if (desc.isNotEmpty() && estacion.isNotEmpty() && area.isNotEmpty()) {
-            // Generar un ID único para el ticket
+            // Genera un ID único para el ticket
             val ticketId = databaseReference.push().key ?: ""
 
-            // Crear un objeto Ticket con los datos
+            // agrega los datos a variable ticket dentro de la tabla Ticket
             val ticket = Ticket(desc, estacion, area, ticketId)
 
             // Guardar el ticket en la base de datos
             databaseReference.child(ticketId).setValue(ticket)
 
-            // Limpiar los campos después de guardar
+            // Limpia los campos después de guardar
             desctext.text.clear()
             autocompletaestacionr.text.clear()
             autocompletarproblema.text.clear()
