@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity(){
             if (txtusuario.isNotEmpty() && txtpsw.isNotEmpty()) {
                     loginUsuarios(txtusuario, txtpsw)
             } else {
-                Toast.makeText(this@LoginActivity, "Todos los campos deben estar llenos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, "Todos los campos deben estar llenos!", Toast.LENGTH_SHORT).show()
             }
         }
 
