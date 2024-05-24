@@ -60,7 +60,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MapaActivity"
+            android:name=".MapaActivity" 
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.SistemaSoporte.NoActionBar">
