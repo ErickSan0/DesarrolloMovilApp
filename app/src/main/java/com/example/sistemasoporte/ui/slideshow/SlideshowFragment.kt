@@ -1,10 +1,12 @@
 package com.example.sistemasoporte.ui.slideshow
-
 import android.os.Bundle
+import com.example.sistemasoporte.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.sistemasoporte.Ticket
 import com.example.sistemasoporte.databinding.FragmentSlideshowBinding
@@ -29,39 +31,57 @@ class SlideshowFragment : Fragment() {
         _binding = FragmentSlideshowBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textSlideshow
+        val ContenedorTicket: LinearLayout = binding.contenedor
 
-        // Inicializar Firebase
         databaseReference = FirebaseDatabase.getInstance().reference.child("ticket")
         auth = FirebaseAuth.getInstance()
-        currentUser = auth.currentUser ?: return root // Verificar si el usuario está autenticado
+        currentUser = auth.currentUser ?: return root
 
-        // Escuchar cambios en la base de datos y mostrar solo los tickets del usuario actual
         ticketListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val tickets = mutableListOf<String>()
+                ContenedorTicket.removeAllViews()
                 for (snapshot in dataSnapshot.children) {
                     val ticket = snapshot.getValue(Ticket::class.java)
-                    if (ticket != null && ticket.id == currentUser.uid) {
-                        val ticketInfo =
-                            "Estacion: ${ticket.estacion}, Área: ${ticket.area}, Descripción: ${ticket.description}, ID: ${ticket.id}, "
-                        tickets.add(ticketInfo)
+                    if (ticket != null && ticket.usuarioID == currentUser.uid) {
+                        val ticketInfo = """
+                            Estación: ${ticket.estacion}
+                            Área: ${ticket.area}
+                            Descripción: ${ticket.description}
+                            Estado: ${ticket.estado}
+                        """.trimIndent()
+
+                        val ticketTextView = TextView(requireContext()).apply {
+                            text = ticketInfo
+                            setPadding(10, 10, 10, 10)
+                            setTextColor(resources.getColor(android.R.color.white))
+                            textSize = 16f
+                            setBackgroundResource(R.drawable.borde)
+                            layoutParams = LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                            ).apply {
+                                setMargins(0, 0, 0, 16)
+                            }
+                        }
+                        ContenedorTicket.addView(ticketTextView)
                     }
                 }
-                textView.text = if (tickets.isNotEmpty()) {
-                    tickets.joinToString("\n\n")
-                } else {
-                    "No hay tickets para mostrar para este usuario"
+                if (ContenedorTicket.childCount == 0) {
+                    val emptyTextView = TextView(requireContext()).apply {
+                        text = "No hay tickets para mostrar para este usuario"
+                        setPadding(10, 10, 10, 10)
+                        setTextColor(resources.getColor(android.R.color.white))
+                        textSize = 16f
+                    }
+                    ContenedorTicket.addView(emptyTextView)
                 }
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                // Manejar errores de Firebase
+                Toast.makeText(requireContext(), "Error: ${databaseError.message}", Toast.LENGTH_SHORT).show()
             }
         }
-
         databaseReference.addValueEventListener(ticketListener as ValueEventListener)
-
         return root
     }
 
@@ -71,4 +91,3 @@ class SlideshowFragment : Fragment() {
         _binding = null
     }
 }
-

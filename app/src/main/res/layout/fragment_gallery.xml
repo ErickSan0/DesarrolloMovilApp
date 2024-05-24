@@ -75,6 +75,9 @@
                     android:layout_marginLeft="5dp"
                     android:layout_weight="1"
                     android:dropDownHeight="200dp"
+                    app:hintTextColor="@color/black"
+                    android:textColor="@color/black"
+
                     android:inputType="none"
                     android:textSize="18dp"
                     tools:text="Área" />
@@ -87,32 +90,11 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginLeft="5dp"
                 android:backgroundTint="@color/black"
+                android:textColor="@color/black"
                 android:hint="@string/error"
                 android:inputType="textMultiLine"
                 android:minLines="4"
                 android:textSize="18dp" />
-
-            <Button
-                android:id="@+id/selectimg"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center_horizontal"
-                android:backgroundTint="@color/navcolor"
-                android:textColor="@color/white"
-                android:onClick="seleccionarImagen"
-                android:text="@string/imagen"
-                android:textSize="18dp" />
-
-            <ImageView
-                android:id="@+id/imgSelected"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_below="@id/selectimg"
-                android:layout_centerHorizontal="true" />
 
             <Button
                 android:id="@+id/btnGenerar"

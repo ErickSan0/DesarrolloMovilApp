@@ -36,6 +36,13 @@
         <item>Administrador</item>
     </string-array>
 
+    <string-array name="estado">
+        <item>Abierto</item>
+        <item>Pendiente</item>
+        <item>Cerrado</item>
+
+    </string-array>
+
 
 
     <string name="menu_home">Inicio</string>

@@ -7,6 +7,7 @@ data class TablasBD(
     val tipo: TipoCuenta = TipoCuenta.USUARIO,
     val id: String? = null
     )
+
 enum class TipoCuenta {
     USUARIO,
     ADMINISTRADOR
@@ -16,4 +17,6 @@ data class Ticket(
     val estacion: String? = null,
     val area: String? = null,
     val id: String? = null,
+    val usuarioID: String? = null,
+    val estado: String = "abierto"
     )

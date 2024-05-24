@@ -11,6 +11,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.auth.FirebaseAuth
+
 
 class RegistroActivity : AppCompatActivity() {
 
@@ -18,6 +20,8 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
     private lateinit var autoCompleteTextView: AutoCompleteTextView
+    private lateinit var firebaseAuth: FirebaseAuth
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +30,7 @@ class RegistroActivity : AppCompatActivity() {
 
         firebaseDatabase = FirebaseDatabase.getInstance()
         databaseReference = firebaseDatabase.reference.child("usuario")
+        firebaseAuth = FirebaseAuth.getInstance()
 
         val tipoArray = resources.getStringArray(R.array.tipo)
         val tipoAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, tipoArray)
@@ -68,25 +73,37 @@ class RegistroActivity : AppCompatActivity() {
             finish()
         }
     }
-    private fun registrarUsuarios(usuario: String, psw: String,  correo: String, tipoCuenta: TipoCuenta){
-        databaseReference.orderByChild("usuario").equalTo(usuario).addListenerForSingleValueEvent(object : ValueEventListener{
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (!dataSnapshot.exists()){
-                    val id = databaseReference.push().key
-                    val tablasBD = TablasBD(usuario, psw, correo, tipoCuenta, id)
-                    databaseReference.child(id!!).setValue(tablasBD)
-                    Toast.makeText(this@RegistroActivity, "Registro exitoso", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this@RegistroActivity, LoginActivity::class.java))
-                } else {
-                    Toast.makeText(this@RegistroActivity, "El usuario ya existe!", Toast.LENGTH_SHORT).show()
+    private fun registrarUsuarios(usuario: String, psw: String, correo: String, tipoCuenta: TipoCuenta) {
+        firebaseAuth.createUserWithEmailAndPassword(correo, psw).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val user = firebaseAuth.currentUser
+                val id = user?.uid
+                val tablasBD = TablasBD(usuario, psw, correo, tipoCuenta, id)
+                if (id != null) {
+                    databaseReference.child(id).setValue(tablasBD).addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(
+                                this@RegistroActivity,
+                                "Registro exitoso",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            startActivity(Intent(this@RegistroActivity, LoginActivity::class.java))
+                        } else {
+                            Toast.makeText(
+                                this@RegistroActivity,
+                                "Error al guardar los datos",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
                 }
+            } else {
+                Toast.makeText(
+                    this@RegistroActivity,
+                    "Error en la autenticación: ${task.exception?.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@RegistroActivity, "Algo salio mal!: ${error.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
-
+        }
     }
-
 }

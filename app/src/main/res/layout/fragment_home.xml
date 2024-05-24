@@ -33,17 +33,6 @@
         android:layout_marginTop="30dp"
         />
 
-    <TextView
-        android:id="@+id/usernameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@+id/welcomeText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp"
-        />
 
     <TextView
         android:id="@+id/datosgenerales"
@@ -51,31 +40,35 @@
         android:layout_height="wrap_content"
         android:text="Datos Generales"
         android:textStyle="bold"
+        android:textAlignment="center"
         android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@+id/usernameText"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="50dp"
         />
-
     <TextView
-        android:id="@+id/NombreDG"
+        android:id="@+id/usernameText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Usuario"
-        android:textSize="25sp"
+        android:text=""
+        android:textSize="30sp"
+        android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@+id/datosgenerales"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"
         />
+
+
     <TextView
-        android:id="@+id/estacionDG"
+        android:id="@+id/correo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Estación"
+        android:text=""
         android:textSize="25sp"
-        app:layout_constraintTop_toBottomOf="@+id/NombreDG"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@+id/usernameText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"

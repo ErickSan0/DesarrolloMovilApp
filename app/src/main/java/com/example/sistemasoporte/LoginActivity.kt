@@ -10,11 +10,15 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.auth.FirebaseAuth
+
 
 class LoginActivity : AppCompatActivity(){
     private lateinit var binding: LoginActivityBinding
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
+    private lateinit var firebaseAuth: FirebaseAuth
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +29,8 @@ class LoginActivity : AppCompatActivity(){
 
         firebaseDatabase = FirebaseDatabase.getInstance()
         databaseReference = firebaseDatabase.reference.child("usuario")
+        firebaseAuth = FirebaseAuth.getInstance()
+
 
         binding.btnlogin.setOnClickListener {
             val txtusuario = binding.user.text.toString()
@@ -45,38 +51,41 @@ class LoginActivity : AppCompatActivity(){
             finish()
         }
     }
-    private fun loginUsuarios(usuario: String, psw: String) {
-        databaseReference.orderByChild("usuario").equalTo(usuario).addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                if (dataSnapshot.exists()) {
-                    var usuarioCorrecto = false
-                    for (userSnapshot in dataSnapshot.children) {
-                        val tablabd = userSnapshot.getValue(TablasBD::class.java)
-                        if (tablabd != null && tablabd.psw == psw) {
-                            usuarioCorrecto = true
-                            Toast.makeText(this@LoginActivity, "Bienvenido", Toast.LENGTH_SHORT).show()
-                            val intent = if (tablabd.tipo == TipoCuenta.ADMINISTRADOR) {
-                                Intent(this@LoginActivity, AdminMain::class.java)
-                            } else {
-                                Intent(this@LoginActivity, MainActivity::class.java)
+    private fun loginUsuarios(correo: String, psw: String) {
+        firebaseAuth.signInWithEmailAndPassword(correo, psw).addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                val user = firebaseAuth.currentUser
+                if (user != null) {
+                    databaseReference.orderByChild("correo").equalTo(correo)
+                        .addListenerForSingleValueEvent(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    for (userSnapshot in dataSnapshot.children) {
+                                        val tablabd = userSnapshot.getValue(TablasBD::class.java)
+                                        if (tablabd != null) {
+                                            val intent = if (tablabd.tipo == TipoCuenta.ADMINISTRADOR) {
+                                                Intent(this@LoginActivity, AdminMain::class.java)
+                                            } else {
+                                                Intent(this@LoginActivity, MainActivity::class.java)
+                                            }
+                                            startActivity(intent)
+                                            finish()
+                                            return
+                                        }
+                                    }
+                                 } else {
+                                    Toast.makeText(this@LoginActivity, "El usuario no existe en la base de datos!", Toast.LENGTH_SHORT).show()
+                                }
                             }
-                                startActivity(intent)
-                            finish()
-                            return
-                        }
-                    }
-                    if (!usuarioCorrecto) {
-                        Toast.makeText(this@LoginActivity, "La contraseña es incorrecta", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    Toast.makeText(this@LoginActivity, "El usuario no existe!", Toast.LENGTH_SHORT).show()
+
+                            override fun onCancelled(error: DatabaseError) {
+                                Toast.makeText(this@LoginActivity, "Algo salió mal!: ${error.message}", Toast.LENGTH_SHORT).show()
+                            }
+                        })
                 }
+            } else {
+                Toast.makeText(this@LoginActivity, "Error en la autenticación: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
             }
-
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@LoginActivity, "Algo salió mal!: ${error.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
+        }
     }
-
 }

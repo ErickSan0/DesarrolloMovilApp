@@ -22,5 +22,10 @@
         android:orderInCategory="100"
         android:title="@string/sesion"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/map"
+        android:title="Ver Mapa"
+        android:orderInCategory="50"
+        app:showAsAction="never"/>
 
 </menu>
