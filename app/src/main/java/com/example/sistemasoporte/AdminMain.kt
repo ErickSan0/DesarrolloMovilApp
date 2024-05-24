@@ -17,7 +17,6 @@ class AdminMain : AppCompatActivity() {
     private lateinit var databaseReference: DatabaseReference
     private lateinit var auth: FirebaseAuth
     private lateinit var ticketid: EditText
-    private lateinit var estadoEditText: EditText
     private lateinit var actuBtn: Button
     private lateinit var salirbtn: Button
     private lateinit var contenedor: LinearLayout
@@ -31,7 +30,6 @@ class AdminMain : AppCompatActivity() {
         databaseReference = FirebaseDatabase.getInstance().reference.child("ticket")
 
         ticketid = findViewById(R.id.ticketIdEditText)
-        estadoEditText = findViewById(R.id.estadoEditText)
         actuBtn = findViewById(R.id.updateButton)
         salirbtn = findViewById(R.id.salirbtn)
         contenedor = findViewById(R.id.ticketsContainer)
@@ -44,14 +42,14 @@ class AdminMain : AppCompatActivity() {
 
         // Agregar líneas para el AutoCompleteTextView
         autoCompleteTextView = findViewById(R.id.autocompletarestado)
-        val opcionesUsuario = resources.getStringArray(R.array.tipo)
-        val adapterUsuario = ArrayAdapter(this, R.layout.seleccionarray, opcionesUsuario)
+        val opcionesEstado = resources.getStringArray(R.array.estado)
+        val adapterUsuario = ArrayAdapter(this, R.layout.seleccionarray, opcionesEstado)
         autoCompleteTextView.setAdapter(adapterUsuario)
 
 
         actuBtn.setOnClickListener {
             val ticketId = ticketid.text.toString()
-            val nuevoEstado = estadoEditText.text.toString()
+            val nuevoEstado = autoCompleteTextView.text.toString()
             if (ticketId.isNotEmpty() && nuevoEstado.isNotEmpty()) {
                 actualizarEstadoTicket(ticketId, nuevoEstado)
             } else {
@@ -124,7 +122,7 @@ class AdminMain : AppCompatActivity() {
             .addOnSuccessListener {
                 Toast.makeText(this, "Estado actualizado exitosamente", Toast.LENGTH_SHORT).show()
                 ticketid.text.clear()
-                estadoEditText.text.clear()
+                autoCompleteTextView.text.clear()
             }
             .addOnFailureListener {
                 Toast.makeText(this, "Error al actualizar el estado", Toast.LENGTH_SHORT).show()

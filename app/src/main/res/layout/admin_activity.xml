@@ -38,19 +38,12 @@
         android:layout_marginBottom="8dp"
         android:enabled="false" />
 
-    <EditText
-        android:id="@+id/estadoEditText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nuevo Estado"
-        android:layout_marginBottom="8dp" />
-
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="8dp"
         android:hint="Estado del ticket"
         android:textSize="18dp"
         app:hintTextColor="@color/black"
@@ -66,7 +59,7 @@
             android:dropDownHeight="200dp"
             android:inputType="none"
             android:textSize="18dp"
-            tools:text="selecciona estado" />
+            tools:text="Selecciona estado" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
